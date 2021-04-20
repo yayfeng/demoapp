@@ -1,0 +1,18 @@
+[Unit]
+Description=Demo APP
+After=cloud-final.service
+After=network.target
+
+[Service]
+User=root
+Type=simple
+
+[Service]
+ExecStart=/usr/bin/java -jar /home/ec2-user/spring-boot-0.0.1-SNAPSHOT.jar
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=demoapp
+
+[Install]
+WantedBy=multi-user.target
