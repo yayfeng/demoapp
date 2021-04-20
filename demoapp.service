@@ -1,6 +1,5 @@
 [Unit]
 Description=Demo APP
-After=cloud-final.service
 After=network.target
 
 [Service]
