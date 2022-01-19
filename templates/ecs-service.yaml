@@ -10,10 +10,6 @@ Parameters:
     Description: Second byte from the left for VPC CIDR
 
 Resources:
-  Cluster:
-    Type: AWS::ECS::Cluster
-    Properties:
-      ClusterName: !Join [ '', [ !Ref EnvName, DeliveryCluster ] ]
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     # Makes sure the log group is created before it is used.
@@ -45,7 +41,7 @@ Resources:
       TaskRoleArn: !Ref TaskRole
       ContainerDefinitions:
         - Name: !Sub '${EnvName}-delivery'
-          Image: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EnvName}-pn-delivery:latest'
+          Image: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/demoapp:latest'
           Environment:
             - Name: AWS_REGIONCODE
               Value: !Ref AWS::Region
@@ -191,7 +187,7 @@ Resources:
     #  - ListenerHTTP
     Properties:
       #ServiceName: !Sub '${EnvName}-delivery'
-      Cluster: !Ref Cluster
+      Cluster: !Sub ${EnvName}-ecs-cluster
       TaskDefinition: !Ref TaskDefinition
       DeploymentConfiguration:
         MinimumHealthyPercent: 100
