@@ -308,3 +308,6 @@ Outputs:
   ServiceName:
     Description: Nome del servizio di cui fare deploy
     Value: !Sub '${DeliveryService.Name}'
+
+  CluserName:
+    Value: !ImportValue { "Fn::Sub": '${EnvName}-ecs-cluster-name' }
