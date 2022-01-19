@@ -9,6 +9,12 @@ Parameters:
     Type: String
     Description: Second byte from the left for VPC CIDR
 
+  CiCdAccount:
+    Description: AWS AccountNumber for CiCd account
+    Type: Number
+    Default: 533281951572
+
+
 Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
@@ -41,7 +47,7 @@ Resources:
       TaskRoleArn: !Ref TaskRole
       ContainerDefinitions:
         - Name: !Sub '${EnvName}-delivery'
-          Image: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/demoapp:latest'
+          Image: !Sub '${CiCdAccount}.dkr.ecr.${AWS::Region}.amazonaws.com/demoapp:latest'
           Environment:
             - Name: AWS_REGIONCODE
               Value: !Ref AWS::Region
