@@ -279,7 +279,7 @@ Resources:
     Properties:
       MinCapacity: 2
       MaxCapacity: 5
-      ResourceId: !Join [ '/', [ service, !Ref Cluster, !GetAtt DeliveryService.Name ] ]
+      ResourceId: !Join [ '/', [ service, !GetAtt DeliveryService.Name ] ]
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
       # "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that allows Application Auto Scaling to modify your scalable target."
@@ -300,9 +300,6 @@ Resources:
 
 
 Outputs:
-  CluserArn:
-    Description: ARN del cluster fargate
-    Value: !Sub '${Cluster.Arn}'
   ServiceName:
     Description: Nome del servizio di cui fare deploy
     Value: !Sub '${DeliveryService.Name}'
